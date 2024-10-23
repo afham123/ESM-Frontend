@@ -1,0 +1,37 @@
+
+.loadingContainer {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    background-color: #495057;
+    overflow: hidden;
+}
+
+.loading{
+    height:50px;
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor:progress;
+
+    border-radius: 50%;
+    border-top: 5px solid #6285ae;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid #6285ae;
+    border-right: 5px solid transparent;
+
+    animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+    0% {
+     transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
