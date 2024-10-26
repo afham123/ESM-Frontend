@@ -1,0 +1,207 @@
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('../assets/img.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.login-form {
+    width: 23em;
+    padding:2em;
+    border-radius: 1em;
+    box-shadow: 0 10px 25px rgba(90,100,100,.2);
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    /* text-align: center; */
+}
+
+.form_title{
+    font-weight: 300;
+    margin-bottom: 1.3em;
+}
+
+.form_div{
+    position: relative;
+    height: 3em;
+    margin-bottom: 1.6em;
+}
+
+.form_input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 1em;
+    border: .1em solid #dadce0;
+    border-radius: .5em;
+    outline: none;
+    padding: 1em;
+    z-index: 1;
+    background: none;
+}
+
+.form_label{
+    position: absolute;
+    left: 1em;
+    top: 1em;
+    padding: 0 .25em;
+    background-color: #fff;
+    color: #80868b;
+    font-size: 1em;
+    transition: .4s;
+}
+
+
+.form_input:focus + .form_label{
+    top: -.5em;
+    left: .8em;
+    color: rgb(28,164,248);
+    font-size: .80em;
+    font-weight: 600;
+    z-index: 5;
+}
+
+.form_input:not(:placeholder-shown).form_input:not(:focus) + .form_label{
+    top: -.5em;
+    left: .8em;
+    font-size: .80em;
+    font-weight: 600;
+    z-index: 5;
+}
+
+.form_input:focus{
+    border: .1em solid rgb(28,164,248);
+}
+
+
+.form_button{
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    padding: 1em 2em;;
+    outline: none;
+    border: none;
+    background-color: rgb(28,164,248);
+    color: #fff;
+    font-size: 1em;
+    border-radius: .5em;
+    cursor: pointer;
+    transition: .4s;
+    margin-top: 6.3em;
+}
+
+.form_button:hover{
+    transform: scale(0.90);
+    box-shadow: 0 5px 5px rgba(0,0,0,0.20);
+}
+
+
+#captcha{
+    margin: 15px 0px;
+}
+
+#preview{
+    color: #555;
+    width: 100%;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    letter-spacing: 8px;
+    border: 1px dashed #888;
+    border-radius: 0.5em;
+    margin-bottom: 1.6em;
+
+}
+
+.form_input_captcha {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 1em;
+    border: 0.1em solid #dadce0;
+    border-radius: 0.5em;
+    outline: none;
+    padding: 1em;
+    z-index: 1;
+    background: none;
+} 
+
+
+.form_label_captcha{
+    position: absolute;
+    left: 1em;
+    top: 5.2em;
+    padding: 0 .25em;
+    background-color: #fff;
+    color: #80868b;
+    font-size: 1em;
+    transition: .4s;
+}
+
+
+.form_input_captcha:focus + .form_label_captcha{
+    top: 4.7em;
+    left: .8em;
+    color: rgb(28,164,248);
+    font-size: .80em;
+    font-weight: 600;
+    z-index: 5;
+}
+
+.form_input_captcha:not(:placeholder-shown).form_input_captcha:not(:focus) + .form_label_captcha{
+    top: 4.6em;;
+    left: .8em;
+    font-size: .80em;
+    font-weight: 600;
+    z-index: 5;
+}
+
+.form_input_captcha:focus{
+    border: .1em solid rgb(28,164,248);
+}
+
+#captcha .preview span{
+    display: inline-block;
+    user-select: none;
+}
+
+#captcha .captcha_form{
+    display: flex;
+}
+
+#captcha .captcha_form input{
+    width: 100%;
+    font-size: 1em;
+    border-radius: 0.5em;
+    outline: none; 
+    padding: 1em;
+    z-index: 1;
+    background: none;
+}
+
+
+#captcha .captcha_form .captcha_refersh{
+    width: 40px;
+    border: none;
+    outline: none;
+    background: #888;
+    color: #eee;
+    cursor: pointer;
+    border-radius: 0.5em;
+    margin-left: 5px;
+}
+.captcha_refersh{
+    transition: .4s;
+}
+
+.captcha_refersh:hover{
+    transition: .4s;
+    transform: scale(0.90);
+}

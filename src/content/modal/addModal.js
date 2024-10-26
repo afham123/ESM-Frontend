@@ -4,7 +4,7 @@ import { requireField } from '../../helper/util';
 import { gql, useMutation } from '@apollo/client';
 import { addUpdateMututation } from '../../helper/gql';
 
-export const AddModal = ({refetch, editData, setEditData}) => {
+export const AddModal = ({refetch, editData, setEditData, isDark}) => {
     const mutattion = gql(addUpdateMututation())
     const [addItem] = useMutation(mutattion)
 
@@ -13,11 +13,10 @@ export const AddModal = ({refetch, editData, setEditData}) => {
         filterData.forEach(item => {
           initialData[item.option] = ''; // Initialize each input field value as empty
         });
-        console.log('addmodeal', editData)
+        // console.log('addmodeal', editData)
         if(Object.keys(editData)!==0) return editData;
         return initialData;
-      });
-      
+    });
     useEffect(() => {
         if (Object.keys(editData).length !== 0) {
         setFormData(editData); // Update formData with editData if it's not empty
@@ -30,7 +29,6 @@ export const AddModal = ({refetch, editData, setEditData}) => {
         setFormData(initialData);
         }
     }, [editData]); // Run this effect when editData changes
-
     function handleInputChange(e) {
         const { id, value } = e.target;
         setFormData(prevState => ({
@@ -39,7 +37,7 @@ export const AddModal = ({refetch, editData, setEditData}) => {
         }));
     }
     function handleClose(){
-        console.log(editData)
+        // console.log(editData)
         setEditData({});
         setFormData(() => {
             const resetData = {};
@@ -50,7 +48,6 @@ export const AddModal = ({refetch, editData, setEditData}) => {
             return resetData;
           });
     }
-    
     async function handleSave(event){
         let isValid = true;
         filterData.forEach((e)=>{
@@ -74,7 +71,7 @@ export const AddModal = ({refetch, editData, setEditData}) => {
                     if(Object.keys(formData).includes('numericId'))   delete formData['numericId'];
 
                     await addItem({ variables:{"item":formData} })
-                    console.log(formData);
+                    // console.log(formData);
                     refetch()
                     window.alert('data saved successfully');
                 }
@@ -93,7 +90,7 @@ export const AddModal = ({refetch, editData, setEditData}) => {
   return (
     <div className="modal fade"  id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-            <div className="modal-content" style={{backgroundColor:"#282828"}}>
+            <div className={`modal-content ` + (isDark ? "add-Modal-dark" : "") }>
             <div className="modal-header">
                 <h1 className="modal-title fs-5" id="exampleModalLabel">Add Data</h1>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleClose}></button>

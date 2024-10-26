@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Dropdown = ({setLimit,setPage, limit}) => {
+export const Dropdown = ({setLimit,setPage, limit, isDIsable}) => {
     function dropdownHandler(val){
         setPage(1)
         setLimit(val)
@@ -13,7 +13,7 @@ export const Dropdown = ({setLimit,setPage, limit}) => {
     }
     return (
         <div className="dropdown">
-            <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" disabled={isDIsable} aria-expanded="false">
                 Rows: {limit}
             </button>
             <ul className="dropdown-menu">

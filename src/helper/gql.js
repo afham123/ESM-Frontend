@@ -1,10 +1,12 @@
 export function generateDynamicQuery(fields){
   return `
-      query ItemFetchQuery($skip: Int, $limit: Int) {
-        items(skip: $skip, limit: $limit) {
-          ${fields.join(' ')} 
+      query ItemFetchQuery($skip: Int, $limit: Int, $searchQuery: String, $scroll_id: String, $advanceQuery: AdvanceQueryInput) {
+        items(skip: $skip, limit: $limit, searchQuery: $searchQuery, scroll_id: $scroll_id, AdvanceQuery: $advanceQuery) {
+          data { 
+            ${fields.join(' ')} 
+          } 
+            totalDocs scroll_id 
         }
-        totalItem
       }
     `;
 }

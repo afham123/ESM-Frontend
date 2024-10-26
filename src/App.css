@@ -8,10 +8,10 @@
 
 
 #root{
-  background-color: #495057;
+  /* background-color: #495057;
   width: 100%;
   padding-top: 20px;
-  padding-bottom: 30px;
+  padding-bottom: 30px; */
 }
 .container {
   background-color: #fff;
@@ -123,6 +123,10 @@ thead {
 tbody tr:hover {
   background-color: #7d8389;
   font-weight: bold !important;
+}
+.add-Modal-dark{
+  background-color:#282828;
+  color: white;
 }
 
 

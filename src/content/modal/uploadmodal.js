@@ -5,7 +5,7 @@ import {  requireField, uploadFields } from '../../helper/util';
 import { uploadItemsMutation } from '../../helper/gql';
 import { gql, useMutation } from '@apollo/client';
 
-export const Uploadmodal = ({refetch}) => {
+export const Uploadmodal = ({refetch, isDark}) => {
   const uploadmutattion = gql(uploadItemsMutation())
   const [uploadItems] = useMutation(uploadmutattion);
 
@@ -84,7 +84,7 @@ export const Uploadmodal = ({refetch}) => {
   return (
     <div className="modal"  id="uploadModal" tabIndex="-1">
   <div className="modal-dialog  modal-lg modal-dialog-scrollable" style={{color:'black'}}>
-    <div className="modal-content">
+    <div className={`modal-content ` + (isDark ? "add-Modal-dark" : "") }>
       <div className="modal-header">
         <h5 className="modal-title" >Upload Data</h5>
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
