@@ -1,6 +1,6 @@
 # Enterprise Supplier Management App-Frontend
 
-The **Enterprise Supplier Management** web application allows enterprises to store, manage, and organize supplier data in the cloud. With features like data filtering, simple and advanced search, and options to add, update, and delete records, it provides a flexible solution for efficient supplier data management.
+The **Enterprise Supplier Management** web application enables enterprises to securely store, manage, and organize supplier data in the cloud. Users can apply filters, perform both simple and advanced searches, and easily add, update, or delete records as needed. The application includes a secure login system with session-based access that expires after 24 hours, ensuring data safety and access control.
 
 ![image](https://github.com/user-attachments/assets/6bd61ed0-6e7a-47ef-be05-eacbcc3c4b03)
 
