@@ -1,4 +1,4 @@
-# Enterprise Supplier Management App- Frontend
+# Enterprise Supplier Management App-Frontend
 
 The **Enterprise Supplier Management** is a web application enables enterprises to securely store, manage, and organize supplier data in the cloud. Users can apply filters, perform both simple and advanced searches, and easily add, update, or delete records as needed. The application includes a secure login system with session-based access that expires after 24 hours, ensuring data safety and access control. With the help of GQL APIs, administrators can retrieve only the data they require from the server, thereby optimizing network bandwidth and enhancing overall performance.
 
