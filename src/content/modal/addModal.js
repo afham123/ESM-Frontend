@@ -62,7 +62,7 @@ export const AddModal = ({refetch, editData, setEditData, isDark}) => {
                 element.classList.add('is-valid')
             }
         })
-        debugger;     
+        // debugger;     
         if(!isValid)   
         event.preventDefault();
         else{   
@@ -70,7 +70,7 @@ export const AddModal = ({refetch, editData, setEditData, isDark}) => {
                     if(Object.keys(formData).includes('__typename'))   delete formData['__typename'];
                     if(Object.keys(formData).includes('numericId'))   delete formData['numericId'];
 
-                    await addItem({ variables:{"item":formData} })
+                    await addItem({ variables:{"item":formData, token:localStorage.getItem('token')} })
                     // console.log(formData);
                     refetch()
                     window.alert('data saved successfully');

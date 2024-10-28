@@ -80,3 +80,7 @@ export function closeDialgog(msg){
       window.alert(msg);
   },1000)
 }
+
+export function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

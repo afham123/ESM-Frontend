@@ -16,7 +16,7 @@ const DropdownFilter = ({setRequestedFields}) => {
   };
 
   const handleClose = () => {
-    debugger;
+    // debugger;
     // console.log(selectedFilters)
     const seleted =["numericId","_id"];
     for(const field of Object.keys(selectedFilters)){

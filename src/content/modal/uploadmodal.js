@@ -54,7 +54,7 @@ export const Uploadmodal = ({refetch, isDark}) => {
         }
         const formatData = []
         uploadData.forEach((row)=>{
-            debugger;
+            // debugger;
             const keys = Object.keys(row) 
             if(keys.length!==keysCount) return;           
             if(requireField.some(e=>!keys.includes(e))){
@@ -71,7 +71,7 @@ export const Uploadmodal = ({refetch, isDark}) => {
         }
         try{
           await uploadItems({
-            variables : { items : formatData}
+            variables : { items : formatData, token:localStorage.getItem('token')}
           })
           refetch()
           window.alert('Items uplpoaded successfully');

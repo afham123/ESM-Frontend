@@ -16,6 +16,9 @@ export const AdvancefilterModal = ({isDark, setadvanceQuery}) => {
         setCompany('');
         setName('');
         setadvanceQuery({});
+        localStorage.setItem('matchPhrase','');
+        localStorage.setItem('company','');
+        localStorage.setItem('name','');
     }
   return (
     <div className="modal"  id="AdvancefilterModal" tabIndex="-1">

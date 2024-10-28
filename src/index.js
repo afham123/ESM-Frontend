@@ -4,10 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+// require('dotenv').config();
+const constant = require('./constant.js');
+const {server_url} = constant;
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: "http://localhost:3001/graphql/"
+  uri: `${server_url}/graphql/`
 });
 
 

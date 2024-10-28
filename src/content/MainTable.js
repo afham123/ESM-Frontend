@@ -10,6 +10,9 @@ import { AddModal } from "./modal/addModal"
 import { Uploadmodal } from './modal/uploadmodal';
 import { deleteItemMutation, generateDynamicQuery } from '../helper/gql';
 import { AdvancefilterModal } from './modal/advancefilterModal';
+import { noDataFound } from '../constant';
+import { useNavigate } from 'react-router-dom';
+
 
 export const MainTable = () => {
     const [requestedFields, setRequestedFields] = useState(localStorage.getItem('seleted')?.split(',') || allFields);
@@ -23,6 +26,7 @@ export const MainTable = () => {
     const [editData, setEditData] = useState({})
     const [scroll_id, setscroll_id] = useState("");
     const [advanceQuery, setadvanceQuery] = useState({});
+    const navigate = useNavigate();
     
     const mutattion = gql(deleteItemMutation())
     const [deleteItems] = useMutation(mutattion);
@@ -30,6 +34,21 @@ export const MainTable = () => {
     function hadleSelec() {
         setSelect(!select);
     }
+
+    function getErrorMsg() {
+        if (data.items.success) {
+            return noDataFound;
+        } else {
+            // Trigger a navigation after a delay if `success` is false
+            setTimeout(() => {
+                console.log('inside sleep');
+                navigate('/');
+            }, 3000);
+    
+            return data.items.message;
+        }
+    }
+    
 
     const handlePageChange = (event, value) => {
         if (searchQuery!=='') {
@@ -54,7 +73,7 @@ export const MainTable = () => {
         console.log('deleting ids', ids);
         let res;
         try {
-            res = await deleteItems({ variables: {ids } })
+            res = await deleteItems({ variables: {ids, token:localStorage.getItem('token') } })
             if(res.data.deleteItem.msg !=null) throw (res.data.deleteItem.msg)
                 refetch()
             window.alert('Selected rows deleted successfully')
@@ -64,7 +83,7 @@ export const MainTable = () => {
         }
     }
     function handleEdit() {
-        debugger;
+        // debugger;
         const ids = getChekedId();
         if (ids.length !== 1) {
             closeDialgog(ids.length === 0 ? 'Please select one row for edit' : 'Please select not more than one row for edit')
@@ -89,12 +108,12 @@ export const MainTable = () => {
         }   
     }
     const { loading, error, data,refetch } = useQuery(query, {
-        variables: { skip: (Number(page) - 1) * 10, limit: Number(limit), searchQuery, scroll_id, advanceQuery },
+        variables: { skip: (Number(page) - 1) * 10, limit: Number(limit), searchQuery, scroll_id, advanceQuery, token:localStorage.getItem('token') },
     })
     // Use useEffect to refetch when data.scroll_id is available
     useEffect(() => {
         if (data?.items.scroll_id) {
-            debugger;
+            // debugger;
             let scrollData = localStorage.getItem('scroll_Data');
             if(scrollData) scrollData = JSON.parse(scrollData);
             else scrollData = {};
@@ -162,9 +181,9 @@ export const MainTable = () => {
                     </div>
                 </div>
             </div>
-            {data.items && data.items.data && data.items.data.length!==0 ? <BasicTable data={data.items.data} select={select} />: <h1> To Data found to  display</h1>}
+            {data.items && data.items.data && data.items.data.length!==0 && data.items.success ? <BasicTable data={data.items.data} select={select} />: <h1>{getErrorMsg()}</h1>}
             <div className="actions-bottom">
-                 <Dropdown isDIsable={data.items=== undefined || searchQuery!==""} limit={limit} setLimit={setLimit} setPage={setPage} />
+                <Dropdown isDIsable={data.items=== undefined || searchQuery!==""} limit={limit} setLimit={setLimit} setPage={setPage} />
                 <Pagination count={data.items ? Math.ceil( data.items.totalDocs / limit) : 0} variant="outlined" shape="rounded" page={page} onChange={handlePageChange} />
             </div>
         </div>

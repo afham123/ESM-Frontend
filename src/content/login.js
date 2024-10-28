@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import '../css/login.css'
-import { captchaValue, initCaptcha } from './captch';
+import { captchaValue, initCaptcha } from '../helper/captch';
 import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../helper/applogin';
+import { Mfamodal } from './modal/mfamodal';
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -14,20 +16,28 @@ const LoginPage = () => {
         initCaptcha()
     }, []);
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         let inputcaptchavalue = document.getElementById("captcha_form").value;
         if (inputcaptchavalue === captchaValue) {
                 // swal("","Log in","success");
-                alert("Log in success");
+                // alert("Log in success");
                 if (!username || !password) {
                     setError('Username and password are required');
                     return;
                 }
                 // Here you would normally call an API to verify credentials
-                if (username === 'user' && password === 'pass') {
+                const res = await loginUser(username, password);
+                if (res.success) {
+                    // debugger;
+                    // setTimeout(() => {
+                    //     const modalElement = document.getElementById('Mfamodal');
+                    //     const myModal = new window.bootstrap.Modal(modalElement);
+                    //     myModal.show();
+                    // }, 500);
+                    localStorage.setItem('token', res.data)
                     navigate('/table');
                 } else {
-                    setError('Invalid username or password');
+                    setError(res.message);
                 }
             }
         else{
@@ -41,6 +51,7 @@ const LoginPage = () => {
         <div className="login-page" >
             <div className="login-form">
                 <h2 className='text-center form_title'>Login</h2>
+                <Mfamodal setError={setError} username={username} password={password}/>
             
                 {error && <div className="alert alert-danger" role="alert">{error}</div>}
                 <div className="form_div">
