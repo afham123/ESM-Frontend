@@ -67,10 +67,11 @@ export const MainTable = () => {
         exportToCsv(downloadData);
     }
     async function handleDelete() {
-        const ids = getChekedId();
+        const ids = getChekedId().filter(id=>id!=="allCheckBox");
         if (ids.length === 0)
             return
         console.log('deleting ids', ids);
+
         let res;
         try {
             res = await deleteItems({ variables: {ids, token:localStorage.getItem('token') } })
