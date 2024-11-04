@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export const AdvancefilterModal = ({isDark, setadvanceQuery}) => {
+export const AdvancefilterModal = ({isDark, setadvanceQuery, setsearchQuery}) => {
     const [matchPhrase, setMatchPhrase] = useState(localStorage.getItem('matchPhrase')||'');
     const [company, setCompany] = useState(localStorage.getItem('company')||'');
     const [name, setName] = useState(localStorage.getItem('name')||'');
@@ -10,6 +10,7 @@ export const AdvancefilterModal = ({isDark, setadvanceQuery}) => {
         localStorage.setItem('matchPhrase',matchPhrase)
         localStorage.setItem('company',company)
         setadvanceQuery({ MatchPhrase: matchPhrase, company, name });
+        setsearchQuery('');
     }
     function handleReset(){
         setMatchPhrase('');

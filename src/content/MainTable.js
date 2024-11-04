@@ -173,7 +173,7 @@ export const MainTable = () => {
                             {select && <button className='me-2' onClick={handleDownload}><i className="fa-solid fa-download"></i> Download</button>}
                             {select && <button className='me-2' onClick={handleDelete}><i className="fa-solid fa-trash"></i> Delete</button>}
                             <button  type="button" data-bs-toggle="modal" data-bs-target="#AdvancefilterModal"><i className="fa-solid fa-filter"></i> Advance Filter</button>
-                            <AdvancefilterModal setadvanceQuery={setadvanceQuery} isDark={isDark}/>
+                            <AdvancefilterModal setadvanceQuery={setadvanceQuery} setsearchQuery={setsearchQuery} isDark={isDark}/>
                         </div>
                         <div className="col col-end">
                             <input style={{ width: "auto" }} id="searchInput" type="text" onKeyUp={handlesearch} 
