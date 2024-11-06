@@ -129,12 +129,13 @@ export const MainTable = () => {
     if (isDark) {
         setTimeout(() => {
             document.querySelector(".container")?.classList.add("dark-mode");
+            // document.body.classList.add("dark-mode");
             document.querySelectorAll("table").forEach((table) => {
                 table.classList.add("dark-mode");
             });
             if( document.getElementById('searchInput'))
             document.getElementById('searchInput').value = searchQuery;
-        }, 10)
+        }, 20)
     }
     // debugger;
     return (
