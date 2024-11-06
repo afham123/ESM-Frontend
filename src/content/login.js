@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import '../css/login.css'
 import { captchaValue, initCaptcha } from '../helper/captch';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../helper/applogin';
 import { Mfamodal } from './modal/mfamodal';
 
 const LoginPage = () => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -29,13 +29,13 @@ const LoginPage = () => {
                 const res = await loginUser(username, password);
                 if (res.success) {
                     // debugger;
-                    // setTimeout(() => {
-                    //     const modalElement = document.getElementById('Mfamodal');
-                    //     const myModal = new window.bootstrap.Modal(modalElement);
-                    //     myModal.show();
-                    // }, 500);
-                    localStorage.setItem('token', res.data)
-                    navigate('/table');
+                    setTimeout(() => {
+                        const modalElement = document.getElementById('Mfamodal');
+                        const myModal = new window.bootstrap.Modal(modalElement);
+                        myModal.show();
+                    }, 500);
+                    // localStorage.setItem('token', res.data)
+                    // navigate('/table');
                 } else {
                     setError(res.message);
                 }

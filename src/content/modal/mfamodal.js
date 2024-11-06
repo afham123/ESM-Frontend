@@ -6,15 +6,21 @@ export const Mfamodal = ({setError, username, password}) => {
     
     const navigate = useNavigate();
     async function handleClick() {
-        const MFA_Code = document.getElementById('MFA_Code').ariaValueMax;
-        const res = await verifyMFA(username, password, MFA_Code);
-        if (res.success) {
-            // debugger;
-            window.bootstrap.Modal.getInstance(document.getElementById('Mfamodal')).hide();
-            localStorage.setItem('token', res.data)
-            navigate('/table');
-        } else {
-            setError(res.message);
+        const MFA_Code = document.getElementById('MFA_Code').value;
+        try{
+
+            const res = await verifyMFA(username, password, MFA_Code);
+            if (res.success) {
+                // debugger;
+                window.bootstrap.Modal.getInstance(document.getElementById('Mfamodal')).hide();
+                localStorage.setItem('token', res.data)
+                navigate('/table');
+            } else {
+                setError(res.message);
+            }
+        }
+        catch(err){
+            setError(err.message);
         }
     }
     return (
