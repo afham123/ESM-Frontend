@@ -2,7 +2,7 @@ export function darkModeHandler(setDark, isDark) {
     const newDarkMode = !isDark;
     
     // Toggle the dark-mode class for body, container, and table
-    document.body.classList.toggle("dark-mode", newDarkMode);
+    // document.body.classList.toggle("dark-mode", newDarkMode);
     document.querySelector(".container").classList.toggle("dark-mode", newDarkMode);
     document.querySelectorAll("table").forEach((table) => {
       table.classList.toggle("dark-mode");
