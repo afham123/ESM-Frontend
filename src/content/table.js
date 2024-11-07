@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { filterData } from '../helper/filterData';
-import { checkAll } from '../helper/util';
+import { checkAll, uncheckAll } from '../helper/util';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -31,8 +31,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 export default function BasicTable({data, select}) {
   function handleAllCheckBox(event){
-    if(!event.target.checked) {return
-    };
+    if(!event.target.checked) {
+      uncheckAll()
+    }
+    else
     checkAll()
     // debugger;
   }

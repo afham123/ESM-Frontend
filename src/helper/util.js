@@ -72,6 +72,7 @@ export function exportToCsv(Rows) {
 }
 
 export const checkAll = ()=> Array.from(document.querySelectorAll('input[type="checkbox"]')).forEach(e=>e.checked=true); 
+export const uncheckAll = ()=> Array.from(document.querySelectorAll('input[type="checkbox"]')).forEach(e=>e.checked=false); 
 
 export function closeDialgog(msg){
     setTimeout(()=>{
