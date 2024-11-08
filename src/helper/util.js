@@ -15,8 +15,9 @@ export function darkModeHandler(setDark, isDark) {
 
 
 export const allFields = [
+  'Enq_num', 
   'company', '_id', 'name', 'category', 'contact_num', 'email', 'location', 'GST_No',
-'GST_Turnover', 'Supplier_Type', 'numericId', 'Enq_num'
+'GST_Turnover', 'Supplier_Type', 'numericId'
 ]
 
 export const requireField = [

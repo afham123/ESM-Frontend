@@ -1,5 +1,9 @@
 export const filterData = [
     {
+        "label": "Enquiry number",
+        "option": "Enq_num"
+    },
+    {
         "label": "Item Name",
         "option": "name"
     },
@@ -46,10 +50,6 @@ export const filterData = [
     {
         "label": "status",
         "option": "status"
-    },
-    {
-        "label": "Enquiry number",
-        "option": "Enq_num"
     }
 ]
 
