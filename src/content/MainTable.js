@@ -1,4 +1,4 @@
-import { gql, useMutation, useQuery } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import { Dropdown } from './dropdown';
 import { allFields, closeDialgog, darkModeHandler, exportToCsv, getChekedId } from '../helper/util';
@@ -8,10 +8,11 @@ import BasicTable from './table';
 import { Loading } from './loading';
 import { AddModal } from "./modal/addModal"
 import { Uploadmodal } from './modal/uploadmodal';
-import { deleteItemMutation, generateDynamicQuery } from '../helper/gql';
+import {  generateDynamicQuery } from '../helper/gql';
 import { AdvancefilterModal } from './modal/advancefilterModal';
 import { noDataFound } from '../constant';
 import { useNavigate } from 'react-router-dom';
+import {DeleteModal} from './modal/deleteModal'
 
 
 export const MainTable = () => {
@@ -26,10 +27,7 @@ export const MainTable = () => {
     const [editData, setEditData] = useState({})
     const [scroll_id, setscroll_id] = useState("");
     const [advanceQuery, setadvanceQuery] = useState({});
-    const navigate = useNavigate();
-    
-    const mutattion = gql(deleteItemMutation())
-    const [deleteItems] = useMutation(mutattion);
+    const navigate = useNavigate();    
 
     function hadleSelec() {
         setSelect(!select);
@@ -71,17 +69,13 @@ export const MainTable = () => {
         if (ids.length === 0)
             return
         console.log('deleting ids', ids);
+        localStorage.setItem('deleteIds', JSON.stringify(ids))
 
-        let res;
-        try {
-            res = await deleteItems({ variables: {ids, token:localStorage.getItem('token') } })
-            if(res.data.deleteItem.msg !=null) throw (res.data.deleteItem.msg)
-                refetch()
-            window.alert('Selected rows deleted successfully')
-        }
-        catch (err) {
-            window.alert(res?.msg, err.message);
-        }
+        setTimeout(() => {
+            const modalElement = document.getElementById('delteModal');
+            const myModal = new window.bootstrap.Modal(modalElement);
+            myModal.show();
+        }, 500);
     }
     function handleEdit() {
         // debugger;
@@ -157,6 +151,7 @@ export const MainTable = () => {
                         <i className="fa-solid fa-plus"></i> Add
                     </button>
                     <AddModal isDark={isDark} editData={editData} setEditData={setEditData} refetch={refetch}/>
+                    <DeleteModal refetch={refetch}/>
                 </div>
             </header>
 

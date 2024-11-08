@@ -23,8 +23,8 @@ export function addUpdateMututation(){
 
 export function deleteItemMutation(){
   return `
-  mutation DeleteItemsMutation($ids: [ID!], $token: String){
-      deleteItem(ids: $ids, token: $token){
+  mutation DeleteItemsMutation($ids: [ID!], $token: String, $password: String){
+      deleteItem(ids: $ids, token: $token, password: $password){
         msg success
       }
   }

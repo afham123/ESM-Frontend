@@ -16,7 +16,7 @@ export function darkModeHandler(setDark, isDark) {
 
 export const allFields = [
   'company', '_id', 'name', 'category', 'contact_num', 'email', 'location', 'GST_No',
-'GST_Turnover', 'Supplier_Type', 'numericId'
+'GST_Turnover', 'Supplier_Type', 'numericId', 'Enq_num'
 ]
 
 export const requireField = [
@@ -70,6 +70,7 @@ export function exportToCsv(Rows) {
       }
   }
 }
+
 
 export const checkAll = ()=> Array.from(document.querySelectorAll('input[type="checkbox"]')).forEach(e=>e.checked=true); 
 export const uncheckAll = ()=> Array.from(document.querySelectorAll('input[type="checkbox"]')).forEach(e=>e.checked=false); 

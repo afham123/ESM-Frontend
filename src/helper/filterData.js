@@ -46,6 +46,10 @@ export const filterData = [
     {
         "label": "status",
         "option": "status"
+    },
+    {
+        "label": "Enquiry number",
+        "option": "Enq_num"
     }
 ]
 
