@@ -17,11 +17,10 @@ export const DeleteModal = ({refetch}) => {
             if(res.data.deleteItem.msg !=null) throw new Error(res.data.deleteItem.msg);
             window.alert('Selected rows deleted successfully')
             if (res.data.deleteItem.success) {
-                // debugger;
+                refetch()
                 window.bootstrap.Modal.getInstance(document.getElementById('delteModal')).hide();
             } else {
                 console.log(res);
-                refetch()
                 window.alert(res.data.deleteItem.msg);
             }
         }
