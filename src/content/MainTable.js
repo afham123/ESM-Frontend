@@ -49,12 +49,12 @@ export const MainTable = () => {
     
 
     const handlePageChange = (event, value) => {
-        if (searchQuery!=='') {
-            const scrollData = localStorage.getItem('scroll_Data');
-            console.log('scrollData', scrollData);
-            // let destinationPage = event.target.
-            if(scrollData) setscroll_id(JSON.parse(scrollData)[`${value}|${limit}`]);
-        }
+        // if (searchQuery!=='') {
+        //     const scrollData = localStorage.getItem('scroll_Data');
+        //     console.log('scrollData', scrollData);
+        //     // let destinationPage = event.target.
+        //     if(scrollData) setscroll_id(JSON.parse(scrollData)[`${value}|${limit}`]);
+        // }
         setPage(value); // Update the state with the selected page
         // refetch()
     };
@@ -103,7 +103,7 @@ export const MainTable = () => {
         }   
     }
     const { loading, error, data,refetch } = useQuery(query, {
-        variables: { skip: (Number(page) - 1) * 10, limit: Number(limit), searchQuery, scroll_id, advanceQuery, token:localStorage.getItem('token') },
+        variables: { skip: (Number(page) - 1) * Number(limit), limit: Number(limit), searchQuery, scroll_id, advanceQuery, token:localStorage.getItem('token') },
     })
     // Use useEffect to refetch when data.scroll_id is available
     useEffect(() => {
@@ -180,7 +180,7 @@ export const MainTable = () => {
             </div>
             {data.items && data.items.data && data.items.data.length!==0 && data.items.success ? <BasicTable data={data.items.data} select={select} />: <h1>{getErrorMsg()}</h1>}
             <div className="actions-bottom">
-                <Dropdown isDIsable={data.items=== undefined || searchQuery!==""} limit={limit} setLimit={setLimit} setPage={setPage} />
+                <Dropdown isDIsable={data.items=== undefined } limit={limit} setLimit={setLimit} setPage={setPage} />
                 <Pagination count={data.items ? Math.ceil( data.items.totalDocs / limit) : 0} variant="outlined" shape="rounded" page={page} onChange={handlePageChange} />
             </div>
         </div>
