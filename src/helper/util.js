@@ -17,7 +17,36 @@ export function darkModeHandler(setDark, isDark) {
 export const allFields = [
   'Enq_num', 
   'company', '_id', 'name', 'category', 'contact_num', 'email', 'location', 'GST_No',
-'GST_Turnover', 'Supplier_Type', 'numericId'
+'GST_Turnover', 'Supplier_Type', 'numericId', 'Remark'
+]
+export const advancefilter = {
+  'name' : '',
+  'MatchPhrase' : '',
+  'Location' : '',
+  'Remark' : '',
+  'SupplierType' : ''
+}
+export const advancefilterData = [
+  {
+    value:'Location',
+    label:'Location'
+  }, 
+  {
+    value : 'name',
+    label: 'Item Name'
+  },
+  {
+    value : 'Remark',
+    label : 'Remark'
+  }, 
+  {
+    value: 'SupplierType',
+    label : 'Supplier Type'
+  }, 
+  {
+    value : 'MatchPhrase',
+    label: 'Exact Match'
+  }
 ]
 
 export const requireField = [

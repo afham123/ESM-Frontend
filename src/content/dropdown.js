@@ -11,18 +11,18 @@ export const Dropdown = ({setLimit,setPage, limit, isDIsable}) => {
         // debugger;
         return "dropdown-item-show " + (limit === val ? 'selected-show' : '');
     }
+    const list = [10,20,50,100,200,400,1000]
     return (
         <div className="dropdown">
             <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" disabled={isDIsable} aria-expanded="false">
                 Rows: {limit}
             </button>
             <ul className="dropdown-menu">
-                <li><p className={getClass(10)} onClick={() => dropdownHandler(10)} >10</p></li>
-                <li><p className={getClass(20)} onClick={() => dropdownHandler(20)} >20</p></li>
-                <li><p className={getClass(50)} onClick={() => dropdownHandler(50)} >50</p></li>
-                <li><p className={getClass(100)} onClick={() => dropdownHandler(100)} >100</p></li>
-                <li><p className={getClass(200)} onClick={() => dropdownHandler(200)} >200</p></li>
-                <li><p className={getClass(400)} onClick={() => dropdownHandler(400)} >400</p></li>
+                {list.map(elem=>{
+                    return (<li key={elem}>
+                        <p className={getClass(elem)} onClick={() => dropdownHandler(elem)} >{elem}</p>
+                    </li>)
+                })}
             </ul>
         </div>
     )

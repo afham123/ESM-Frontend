@@ -7,10 +7,10 @@ filterData.forEach(e => {
   options[e.option] = true;
 });
 
-const DropdownFilter = ({setRequestedFields}) => {
+const DropdownFilter = ({ setRequestedFields }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedFilters, setSelectedFilters] = useState((localStorage.getItem('selectedFilters') && JSON.parse(localStorage.getItem('selectedFilters'))) || options);
-
+  const [selectAll, setSelectAll] = useState(false); 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -18,9 +18,9 @@ const DropdownFilter = ({setRequestedFields}) => {
   const handleClose = () => {
     // debugger;
     // console.log(selectedFilters)
-    const seleted =["numericId","_id"];
-    for(const field of Object.keys(selectedFilters)){
-      if(selectedFilters[field])
+    const seleted = ["numericId", "_id"];
+    for (const field of Object.keys(selectedFilters)) {
+      if (selectedFilters[field])
         seleted.push(field)
     }
     console.log(seleted)
@@ -31,7 +31,18 @@ const DropdownFilter = ({setRequestedFields}) => {
     setAnchorEl(null);
   };
 
+  const handleSelectAll = ()=>{
+    setSelectedFilters((prev)=> {
+      Object.keys(prev).forEach(elem=>{
+        prev[elem]=!selectAll;
+      })
+      return prev;
+    })
+    setSelectAll(!selectAll)
+  }
+
   const handleFilterChange = (option) => {
+    setSelectAll(false)
     setSelectedFilters((prev) => ({
       ...prev,
       [option]: !prev[option]
@@ -40,7 +51,7 @@ const DropdownFilter = ({setRequestedFields}) => {
 
   return (
     <>
-      <Button  className='me-2' variant="contained" onClick={handleClick} startIcon={<i className="fa-solid fa-filter"></i>}>
+      <Button className='me-2' variant="contained" onClick={handleClick} startIcon={<i className="fa-solid fa-filter"></i>}>
         Filter
       </Button>
       <Menu
@@ -55,14 +66,27 @@ const DropdownFilter = ({setRequestedFields}) => {
         }}
       >
         <div style={{ display: 'flex', flexWrap: 'wrap', padding: '10px' }}>
+          <div style={{ width: '60%' }}> {/* Each item takes up 50% width to create two columns */}
+            <MenuItem>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                      checked={selectAll}
+                      onChange={handleSelectAll}
+                  />
+                }
+                label="Select All"
+              />
+            </MenuItem>
+          </div>
           {filterData.map((item, index) => (
             <div key={index} style={{ width: '60%' }}> {/* Each item takes up 50% width to create two columns */}
               <MenuItem>
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={selectedFilters[item.option]}
-                      onChange={() => handleFilterChange(item.option)}
+                    checked={selectedFilters[item.option]}
+                    onChange={() => handleFilterChange(item.option)}                      
                     />
                   }
                   label={item.label}

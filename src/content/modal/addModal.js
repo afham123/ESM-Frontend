@@ -66,17 +66,22 @@ export const AddModal = ({refetch, editData, setEditData, isDark}) => {
         if(!isValid)   
         event.preventDefault();
         else{   
+            let res;
             try{
                     if(Object.keys(formData).includes('__typename'))   delete formData['__typename'];
                     if(Object.keys(formData).includes('numericId'))   delete formData['numericId'];
 
-                    await addItem({ variables:{"item":formData, token:localStorage.getItem('token')} })
+                    res = await addItem({ variables:{"item":formData, token:localStorage.getItem('token')} })
                     // console.log(formData);
-                    refetch()
-                    window.alert('data saved successfully');
+                    if (res.data.addItem.success) {
+                        setTimeout(refetch, 1000)
+                    } else {
+                        window.alert(res.data.addItem.msg);
+                    }
+                    // window.alert('data saved successfully');
                 }
                 catch(err){
-                    console.error(err);
+                    window.alert(err.message);
                 }
               // here i want to hide the modal after 1 sec
               setTimeout(() => {
