@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import * as XLSX from 'xlsx';
+import * as XLSX from 'xlsx/dist/xlsx.full.min.js';
 // import ExcelJS from 'exceljs';
 import BasicTable from '../table';
 import {  requireField, uploadFields } from '../../helper/util';
