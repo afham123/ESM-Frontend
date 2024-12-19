@@ -113,11 +113,14 @@ function handlePreview() {
         }
         try{
           setIsUploading(true); // Set to true when upload starts
-          await uploadItems({
+          const res = await uploadItems({
             variables : { items : formatData, token:localStorage.getItem('token')}
           })
           refetch()
+          if(res.data.uploadItems.success)
           window.alert('Items uplpoaded successfully');
+          else 
+          throw new Error(res.data.uploadItems.msg)
         }
         catch(err){
           window.alert(err.message);

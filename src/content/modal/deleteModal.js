@@ -1,11 +1,12 @@
 import { useMutation } from '@apollo/client';
-import React from 'react'
+import React, { useState } from 'react'
 import { deleteItemMutation } from '../../helper/gql';
 import { gql } from '@apollo/client';
 
 export const DeleteModal = ({refetch}) => {
     const mutattion = gql(deleteItemMutation())
     const [deleteItems] = useMutation(mutattion);
+    const [isDeleteing, setIsDeleteing] = useState(false); // State to track the delete status
 
     async function handleClick(){
         const password = document.getElementById('DeletepasswordInput').value
@@ -13,6 +14,7 @@ export const DeleteModal = ({refetch}) => {
         const token = localStorage.getItem('token')
         let res;
         try {
+            setIsDeleteing(true);
             res = await deleteItems({ variables: {ids, token, password } })
             if(res.data.deleteItem.msg !=null) throw new Error(res.data.deleteItem.msg);
             window.alert('Selected rows deleted successfully')
@@ -26,6 +28,10 @@ export const DeleteModal = ({refetch}) => {
         }
         catch (err) {
             window.alert(err.message);
+        }
+        finally {
+            // Set to false once the Delete is completed (or failed)
+            setIsDeleteing(false);
         }
         
     }
@@ -43,7 +49,9 @@ export const DeleteModal = ({refetch}) => {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" className="btn btn-danger" onClick={handleClick}>Delete</button>
+                        <button type="button" className="btn btn-danger" onClick={handleClick} disabled={isDeleteing}>
+                            {isDeleteing ? 'Deleteing Data...' : 'Delete Data'}
+                        </button>
                     </div>
                 </div>
             </div>
